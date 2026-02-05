@@ -1,27 +1,38 @@
 import React from 'react';
 
 const Navbar = ({ activePage, onPageChange }) => {
-  return (
-    <nav className="navbar sticky top-0 bg-gradient-jet border border-jet rounded-2.5 px-5 py-3.75 mb-7.5 backdrop-blur-lg z-5">
-      <ul className="navbar-list flex gap-2.5">
-        <li className="navbar-item flex-1">
-          <button 
-            className={`navbar-link w-full text-light-gray-70 text-fs-6 font-fw-500 px-3.75 py-2.5 rounded-lg text-center transition-all duration-250 hover:bg-gradient-onyx hover:text-white-1 ${activePage === 'about' ? 'active bg-gradient-yellow-1 text-smoky-black' : ''}`} 
-            onClick={() => onPageChange('about')}
-          >
-            About
-          </button>
-        </li>
+  const navItems = [
+    { id: 'about', label: 'About' },
+    { id: 'resume', label: 'Resume' }
+  ];
 
-        <li className="navbar-item flex-1">
-          <button 
-            className={`navbar-link w-full text-light-gray-70 text-fs-6 font-fw-500 px-3.75 py-2.5 rounded-lg text-center transition-all duration-250 hover:bg-gradient-onyx hover:text-white-1 ${activePage === 'resume' ? 'active bg-gradient-yellow-1 text-smoky-black' : ''}`} 
-            onClick={() => onPageChange('resume')}
+  return (
+    <nav className="fixed top-0 right-0 left-[280px] z-20 backdrop-blur-xl bg-gradient-onyx border-b border-jet">
+      {/* subtle yellow glow */}
+      <div className="absolute inset-0 bg-gradient-to-r from-orange-yellow-crayola/10 via-transparent to-transparent pointer-events-none"></div>
+
+      <div className="relative px-6 py-4 flex items-center gap-4">
+        {navItems.map(item => (
+          <button
+            key={item.id}
+            onClick={() => onPageChange(item.id)}
+            className={`
+              px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300
+              border border-jet bg-gradient-jet
+              hover:border-orange-yellow-crayola/40
+              hover:text-orange-yellow-crayola
+              hover:-translate-y-0.5
+              ${
+                activePage === item.id
+                  ? 'text-orange-yellow-crayola shadow-shadow-2'
+                  : 'text-light-gray-70'
+              }
+            `}
           >
-            Resume
+            {item.label}
           </button>
-        </li>
-      </ul>
+        ))}
+      </div>
     </nav>
   );
 };
