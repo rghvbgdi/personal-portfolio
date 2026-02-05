@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    @apply bg-gradient-onyx text-white-2 text-fs-5 overflow-x-hidden;
+  }
+  
+  ::-webkit-scrollbar {
+    @apply w-2.5;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-smoky-black;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-orange-yellow-crayola rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-vegas-gold;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4;
+  }
+  
+  .h1, .h2, .h3, .h4 {
+    @apply text-white-1 leading-tight;
+  }
+  
+  .h1 {
+    @apply text-fs-1;
+  }
+  
+  .h2 {
+    @apply text-fs-2;
+  }
+  
+  .h3 {
+    @apply text-fs-3;
+  }
+  
+  .h4 {
+    @apply text-fs-4;
+  }
+  
+  .section-title {
+    @apply text-orange-yellow-crayola font-fw-600 mb-4;
+  }
+  
+  .has-underline {
+    @apply relative pb-2 mb-5;
+  }
+  
+  .has-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-12 h-0.75 bg-gradient-text-yellow rounded;
+  }
+  
+  .btn {
+    @apply max-w-max text-white-1 text-fs-6 font-fw-600 flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-250;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-yellow-1 shadow-shadow-2 hover:bg-gradient-yellow-2 hover:-translate-y-0.5;
+  }
+  
+  .btn-secondary {
+    @apply bg-gradient-jet border border-jet shadow-shadow-1 hover:bg-gradient-onyx hover:border-onyx;
+  }
+  
+  .card {
+    @apply bg-gradient-jet border border-jet rounded-2.5 p-6 shadow-shadow-1 transition-all duration-250 hover:-translate-y-1.25 hover:shadow-shadow-2;
+  }
+  
+  .section {
+    @apply my-15;
+  }
+  
+  .grid-list {
+    @apply grid gap-6;
+  }
+  
+  .card-list {
+    @apply grid gap-5;
+  }
+}
