@@ -1,4 +1,5 @@
 import React from 'react';
+import visaLogo from '/public/assets/images/visa-logo-removebg-preview.png';
 
 const About = () => {
   const projects = [
@@ -109,7 +110,7 @@ const About = () => {
       <div className="internship-banner">
         <div className="internship-icon-wrapper">
           <img
-            src="/assets/images/visa-logo-removebg-preview.png"
+            src={visaLogo}
             alt="Visa"
             className="internship-logo"
           />
