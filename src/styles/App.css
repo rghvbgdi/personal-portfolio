@@ -1010,6 +1010,73 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  /* Main Layout */
+  .App {
+    overflow-x: hidden;
+  }
+  
+  .App > main {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .main-content {
+    margin-left: 0 !important;
+    padding: 20px 15px !important;
+    width: 100%;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 100% !important;
+    padding: 20px 15px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--jet) !important;
+  }
+  
+  .sidebar-nav {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-nav-btn {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  
+  .sidebar-nav-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .sidebar-nav-label {
+    font-size: var(--fs-7);
+  }
+  
+  .sidebar-contact-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .sidebar-contact-link {
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+  }
+  
+  .sidebar-badges {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .sidebar-badge {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Internship Banner */
   .internship-banner {
     flex-direction: column;
     text-align: center;
@@ -1021,40 +1088,169 @@
     justify-content: center;
   }
 
-  .article-title {
-    font-size: 28px;
+  /* About Page Content */
+  .about-text {
+    font-size: var(--fs-7);
+    line-height: 1.6;
   }
 
-  .service-cards-grid {
-    grid-template-columns: 1fr;
+  .about-subtitle {
+    font-size: var(--fs-8);
+    margin-bottom: 20px;
   }
 
-  .project-item {
-    flex-direction: column;
-    text-align: center;
-    padding: 25px;
+  /* Service Cards */
+  .service-card {
+    padding: 20px;
+  }
+
+  .service-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .service-title {
+    font-size: var(--fs-6);
+    margin-bottom: 8px;
+  }
+
+  .service-text {
+    font-size: var(--fs-8);
+    line-height: 1.5;
+  }
+
+  /* Tech Stack */
+  .tech-stack {
+    gap: 20px;
+  }
+
+  .tech-category {
+    padding: 20px;
+  }
+
+  .tech-category-title {
+    font-size: var(--fs-6);
+  }
+
+  .tech-items {
+    gap: 8px;
+  }
+
+  .tech-item {
+    padding: 6px 12px;
+    font-size: var(--fs-8);
+  }
+
+  /* Projects */
+  .project-card {
+    padding: 20px;
   }
 
   .project-header {
-    flex-direction: column;
-    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .project-title {
+    font-size: var(--fs-5);
+  }
+
+  .project-stack {
+    font-size: var(--fs-8);
+    margin-bottom: 15px;
+  }
+
+  .project-points {
+    margin-bottom: 15px;
+  }
+
+  .project-point {
+    font-size: var(--fs-8);
+    padding: 8px 0;
+  }
+
+  .project-links {
+    gap: 10px;
+  }
+
+  .project-link {
+    padding: 8px 16px;
+    font-size: var(--fs-8);
+  }
+
+  /* Experience */
+  .experience-card {
+    padding: 20px;
   }
 
   .experience-header {
+    margin-bottom: 12px;
+  }
+
+  .experience-role {
+    font-size: var(--fs-6);
+  }
+
+  .experience-company {
+    font-size: var(--fs-7);
+  }
+
+  .experience-duration {
+    font-size: var(--fs-8);
+  }
+
+  .experience-description {
+    font-size: var(--fs-8);
+    line-height: 1.5;
+  }
+
+  /* Resume */
+  .mapbox {
+    height: 70vh !important;
+    min-height: 500px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 15px 10px !important;
+  }
+
+  .sidebar {
+    padding: 15px 10px !important;
+  }
+
+  .internship-banner {
+    padding: 20px;
+  }
+
+  .service-card,
+  .tech-category,
+  .project-card,
+  .experience-card {
+    padding: 15px;
+  }
+
+  .project-links {
     flex-direction: column;
-    align-items: flex-start;
   }
 
-  .experience-meta {
-    align-items: flex-start;
+  .project-link {
+    width: 100%;
+    justify-content: center;
   }
 
-  .project-icon-box {
-    margin: 0 auto;
+  .sidebar-contact-links {
+    flex-direction: column;
   }
 
-  .tech-stack-list {
-    grid-template-columns: 1fr;
+  .sidebar-contact-link {
+    min-width: auto;
+  }
+
+  .mapbox {
+    height: 60vh !important;
+    min-height: 400px !important;
   }
 }
 
