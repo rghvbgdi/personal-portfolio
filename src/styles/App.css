@@ -2,6 +2,60 @@
   #ENHANCED ABOUT PAGE STYLES
 \*-----------------------------------*/
 
+.App {
+  position: relative;
+}
+
+.App::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(900px circle at 15% 10%, hsla(45, 100%, 72%, 0.12), transparent 55%),
+    radial-gradient(700px circle at 85% 30%, hsla(35, 100%, 68%, 0.08), transparent 55%),
+    radial-gradient(800px circle at 45% 85%, hsla(45, 100%, 72%, 0.06), transparent 60%);
+  filter: blur(0px);
+  opacity: 1;
+  pointer-events: none;
+  z-index: 0;
+  animation: ambientGlow 12s ease-in-out infinite;
+}
+
+.App::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(120deg, hsla(0, 0%, 0%, 0.0), hsla(0, 0%, 0%, 0.22), hsla(0, 0%, 0%, 0.0));
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;
+  animation: sheen 10s ease-in-out infinite;
+}
+
+.App > main {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes ambientGlow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) scale(1.02);
+  }
+}
+
+@keyframes sheen {
+  0%, 100% {
+    transform: translate3d(-8%, 0, 0);
+  }
+  50% {
+    transform: translate3d(8%, 0, 0);
+  }
+}
+
 /* Internship Banner - Highlight Section */
 .internship-banner {
   position: relative;
@@ -18,12 +72,12 @@
   gap: 25px;
   overflow: hidden;
   animation: fadeInUp 0.6s ease-out;
-  transition: all 0.3s ease;
+  transition: transform 450ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 450ms cubic-bezier(0.2, 0.9, 0.2, 1), border-color 450ms cubic-bezier(0.2, 0.9, 0.2, 1);
 }
 
 .internship-banner:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px hsla(45, 100%, 72%, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 28px 70px hsla(45, 100%, 72%, 0.18);
 }
 
 .internship-banner::before {
@@ -50,7 +104,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  animation: float 3s ease-in-out infinite;
+  animation: float 3.2s ease-in-out infinite;
   box-shadow: 0 10px 30px hsla(45, 100%, 72%, 0.3);
 }
 
@@ -213,7 +267,7 @@
   background: var(--bg-gradient-jet);
   border: 1px solid var(--jet);
   color: var(--light-gray-70);
-  transition: var(--transition-1);
+  transition: transform 380ms cubic-bezier(0.2, 0.9, 0.2, 1), border-color 380ms cubic-bezier(0.2, 0.9, 0.2, 1), background 380ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 380ms cubic-bezier(0.2, 0.9, 0.2, 1);
 }
 
 .sidebar-nav-btn::before {
@@ -229,8 +283,9 @@
 }
 
 .sidebar-nav-btn:hover {
-  border-color: hsla(45, 100%, 72%, 0.35);
-  transform: translateY(-2px);
+  border-color: hsla(45, 100%, 72%, 0.45);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 46px hsla(0, 0%, 0%, 0.30);
 }
 
 .sidebar-nav-btn:hover::before {
@@ -241,6 +296,10 @@
   border-color: var(--orange-yellow-crayola);
   background: linear-gradient(135deg, hsla(45, 100%, 72%, 0.10) 0%, hsla(0, 0%, 100%, 0.02) 100%);
   box-shadow: 0 12px 28px hsla(0, 0%, 0%, 0.28);
+}
+
+.sidebar-nav-btn:active {
+  transform: translateY(-1px) scale(0.99);
 }
 
 .sidebar-nav-btn.active::before {
@@ -685,8 +744,20 @@
   color: var(--light-gray);
   font-size: var(--fs-7);
   font-weight: var(--fw-500);
-  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1), border-color 420ms cubic-bezier(0.2, 0.9, 0.2, 1), color 420ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 420ms cubic-bezier(0.2, 0.9, 0.2, 1);
   width: max-content;
+}
+
+.project-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, hsla(45, 100%, 72%, 0.18), transparent);
+  transform: translateX(-120%);
+  transition: transform 650ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  pointer-events: none;
 }
 
 .project-link ion-icon {
@@ -697,7 +768,16 @@
 .project-link:hover {
   border-color: var(--orange-yellow-crayola);
   color: var(--white-1);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 46px hsla(0, 0%, 0%, 0.30);
+}
+
+.project-link:hover::after {
+  transform: translateX(120%);
+}
+
+.project-link:active {
+  transform: translateY(-1px) scale(0.99);
 }
 
 .project-title {
@@ -748,13 +828,14 @@
   padding: 30px;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: transform 450ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 450ms cubic-bezier(0.2, 0.9, 0.2, 1), border-color 450ms cubic-bezier(0.2, 0.9, 0.2, 1);
   margin-bottom: 50px;
 }
 
 .experience-card:hover {
   border-color: var(--orange-yellow-crayola);
-  box-shadow: 0 18px 40px hsla(0, 0%, 0%, 0.28);
+  transform: translateY(-6px);
+  box-shadow: 0 26px 60px hsla(0, 0%, 0%, 0.32);
 }
 
 .experience-header {
@@ -830,12 +911,48 @@
   border: 1px solid hsla(0, 0%, 100%, 0.08);
   border-radius: 20px;
   padding: 30px;
-  transition: all 0.3s ease;
+  transition: transform 450ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 450ms cubic-bezier(0.2, 0.9, 0.2, 1), border-color 450ms cubic-bezier(0.2, 0.9, 0.2, 1);
   --tech-accent: var(--orange-yellow-crayola);
   --tech-accent-soft: hsla(45, 100%, 72%, 0.07);
   --tech-accent-glow: hsla(45, 100%, 72%, 0.18);
   position: relative;
   overflow: hidden;
+}
+
+.tech-stack-item:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--tech-accent) 55%, hsla(0, 0%, 100%, 0.08));
+  box-shadow: 0 26px 60px hsla(0, 0%, 0%, 0.32), 0 0 0 1px var(--tech-accent-soft) inset;
+}
+
+.tech-stack-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(700px circle at 20% 0%, var(--tech-accent-soft), transparent 55%);
+  opacity: 0;
+  transition: opacity 450ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  pointer-events: none;
+}
+
+.tech-stack-item:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .App::before,
+  .App::after,
+  .internship-icon-wrapper,
+  .internship-banner::before {
+    animation: none !important;
+  }
+
+  .internship-banner,
+  .sidebar-nav-btn,
+  .project-link,
+  .tech-stack-item {
+    transition: none !important;
+  }
 }
 
 .tech-stack-item[data-accent="blue"] {
