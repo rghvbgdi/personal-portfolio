@@ -5,9 +5,6 @@ const Sidebar = ({ activePage, onPageChange, isCollapsed, onToggleCollapse }) =>
     <aside
       className={`sidebar fixed top-0 left-0 bottom-0 bg-gradient-onyx border-r border-jet backdrop-blur-xl overflow-y-auto z-10 ${isCollapsed ? 'w-[72px] sidebar--collapsed' : 'w-[280px]'}`}
     >
-      {/* Decorative gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-orange-yellow-crayola/10 via-transparent to-transparent pointer-events-none"></div>
-      
       <div className={`relative py-8 ${isCollapsed ? 'px-3' : 'px-6'}`}>
         <button
           type="button"

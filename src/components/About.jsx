@@ -102,9 +102,26 @@ const About = () => {
         <h2 className="h2 article-title">About me</h2>
       </header>
 
+      <p className="about-lede">
+        I’m a Dual Degree Information Technology student graduating in 2027, focused on building scalable products end-to-end.
+      </p>
+
       <p className="about-subtitle">
         Upcoming Summer 2026 Software Engineering Intern at Visa.
       </p>
+
+      <div className="about-text">
+        <p>
+          I primarily work as a MERN stack developer and enjoy designing clean APIs, performant backend systems, and polished user experiences.
+        </p>
+
+        <div className="about-badges">
+          <span className="about-badge">Dual Degree · IT</span>
+          <span className="about-badge">Graduating 2027</span>
+          <span className="about-badge">MERN Stack</span>
+          <span className="about-badge">Backend + Systems</span>
+        </div>
+      </div>
 
       {/* Visa Internship Highlight Banner */}
       <div className="internship-banner">
@@ -135,6 +152,37 @@ const About = () => {
         </div>
       </div>
 
+      {/* Tech Stack Section (moved up) */}
+      <section className="service mb-12">
+        <h3 className="h3 section-title">
+          <ion-icon name="construct-outline"></ion-icon>
+          Tech Stack
+        </h3>
+
+        <ul className="tech-stack-list">
+          {techStack.map((tech, index) => (
+            <li className="tech-stack-item" data-accent={tech.accent} key={index}>
+              <div className="tech-header">
+                <div className="tech-icon-box">
+                  <ion-icon name={tech.icon}></ion-icon>
+                </div>
+                <h4 className="h4 tech-title">{tech.title}</h4>
+              </div>
+              
+              <div className="tech-items-wrapper">
+                {tech.items.map((item, itemIndex) => (
+                  <span className="tech-badge" key={itemIndex}>
+                    <ion-icon name={item.icon}></ion-icon>
+                    <span>{item.label}</span>
+                  </span>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Experience Section */}
       <section className="service">
         <h3 className="h3 section-title">
           <ion-icon name="briefcase-outline"></ion-icon>
@@ -220,35 +268,7 @@ const About = () => {
         </ul>
       </section>
 
-      {/* Tech Stack Section */}
-      <section className="service">
-        <h3 className="h3 section-title">
-          <ion-icon name="construct-outline"></ion-icon>
-          Tech Stack
-        </h3>
-
-        <ul className="tech-stack-list">
-          {techStack.map((tech, index) => (
-            <li className="tech-stack-item" data-accent={tech.accent} key={index}>
-              <div className="tech-header">
-                <div className="tech-icon-box">
-                  <ion-icon name={tech.icon}></ion-icon>
-                </div>
-                <h4 className="h4 tech-title">{tech.title}</h4>
-              </div>
-              
-              <div className="tech-items-wrapper">
-                {tech.items.map((item, itemIndex) => (
-                  <span className="tech-badge" key={itemIndex}>
-                    <ion-icon name={item.icon}></ion-icon>
-                    <span>{item.label}</span>
-                  </span>
-                ))}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
+      
     </article>
   );
 };

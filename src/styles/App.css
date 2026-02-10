@@ -4,6 +4,11 @@
 
 .App {
   position: relative;
+  --accent-a: hsla(45, 100%, 72%, 0.65);   /* warm outline */
+  --accent-b: hsla(210, 100%, 66%, 0.45);  /* cool outline */
+  --accent-c: hsla(330, 85%, 70%, 0.35);   /* subtle third */
+  --surface-0: hsla(0, 0%, 4%, 0.92);
+  --surface-1: hsla(0, 0%, 6%, 0.78);
 }
 
 .App::before {
@@ -11,44 +16,86 @@
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(900px circle at 15% 10%, hsla(45, 100%, 72%, 0.12), transparent 55%),
-    radial-gradient(700px circle at 85% 30%, hsla(35, 100%, 68%, 0.08), transparent 55%),
-    radial-gradient(800px circle at 45% 85%, hsla(45, 100%, 72%, 0.06), transparent 60%);
-  filter: blur(0px);
-  opacity: 1;
+    radial-gradient(900px circle at 10% 0%, hsla(45, 100%, 72%, 0.12), transparent 55%),
+    radial-gradient(900px circle at 100% 100%, hsla(210, 40%, 20%, 0.55), transparent 60%);
+  opacity: 0.9;
   pointer-events: none;
   z-index: 0;
-  animation: ambientGlow 12s ease-in-out infinite;
 }
 
 .App::after {
   content: '';
   position: fixed;
   inset: 0;
-  background:
-    linear-gradient(120deg, hsla(0, 0%, 0%, 0.0), hsla(0, 0%, 0%, 0.22), hsla(0, 0%, 0%, 0.0));
-  opacity: 0.85;
+  background: linear-gradient(135deg, hsla(0, 0%, 0%, 0.65), hsla(0, 0%, 0%, 0.9));
+  mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 0;
-  animation: sheen 10s ease-in-out infinite;
 }
 
 .App main::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 1px 1px, hsla(0, 0%, 100%, 0.030) 1px, transparent 0);
-  background-size: 22px 22px;
-  opacity: 0.22;
-  mix-blend-mode: overlay;
-  pointer-events: none;
-  z-index: 1;
+  content: none;
 }
 
 .App > main {
   position: relative;
   z-index: 1;
+}
+
+/* Main content area */
+.main-content {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding-block: 4px;
+}
+
+.main-content::before {
+  content: none;
+}
+
+.main-content::after {
+  content: none;
+}
+
+.page-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1040px;
+  margin-inline: auto;
+  padding: 28px 30px;
+  border-radius: 22px;
+  border: 1px solid transparent;
+  background:
+    linear-gradient(180deg, var(--surface-1), var(--surface-0)) padding-box,
+    linear-gradient(135deg, var(--accent-a), var(--accent-b), var(--accent-c)) border-box;
+  box-shadow:
+    0 24px 60px hsla(0, 0%, 0%, 0.68),
+    0 0 0 1px hsla(0, 0%, 100%, 0.02) inset;
+  animation: pageEnter 650ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
+    padding: 32px 40px 36px;
+  }
+}
+
+@keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.99);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.005);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 @keyframes ambientGlow {
@@ -204,7 +251,40 @@
 
 /* Sidebar */
 .sidebar {
-  box-shadow: 12px 0 40px hsla(0, 0%, 0%, 0.18);
+  background: hsla(0, 0%, 4%, 0.94) !important;
+  border-right: 0 !important;
+  box-shadow: 12px 0 40px hsla(0, 0%, 0%, 0.28);
+  scrollbar-width: thin;
+  scrollbar-color: hsla(0, 0%, 100%, 0.20) transparent;
+}
+
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent-a), hsla(0, 0%, 100%, 0.05), var(--accent-b));
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsla(0, 0%, 100%, 0.12), hsla(0, 0%, 100%, 0.22));
+  border-radius: 999px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-a), var(--accent-b));
 }
 
 .sidebar-collapse-btn {
@@ -500,7 +580,18 @@
 .about-subtitle {
   color: var(--light-gray-70);
   font-size: var(--fs-6);
-  margin-bottom: 25px;
+  margin-top: 6px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.about-lede {
+  color: var(--white-2);
+  font-size: var(--fs-5);
+  line-height: 1.85;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  text-align: left;
 }
 
 .about-text {
@@ -509,7 +600,35 @@
   line-height: 1.8;
   margin-bottom: 20px;
   position: relative;
-  padding-left: 20px;
+  padding-left: 0;
+}
+
+.about-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+  padding-left: 0;
+}
+
+.about-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: hsla(0, 0%, 0%, 0.18);
+  border: 1px solid hsla(0, 0%, 100%, 0.10);
+  color: var(--white-2);
+  font-size: var(--fs-7);
+  font-weight: var(--fw-500);
+  letter-spacing: 0.01em;
+  transition: transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1), border-color 420ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 420ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+.about-badge:hover {
+  transform: translateY(-2px);
+  border-color: hsla(45, 100%, 72%, 0.45);
+  box-shadow: 0 18px 46px hsla(0, 0%, 0%, 0.30);
 }
 
 .about-text p {
@@ -518,18 +637,11 @@
   line-height: 2;
   margin-bottom: 20px;
   position: relative;
-  padding-left: 20px;
+  padding-left: 0;
 }
 
 .about-text p::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 12px;
-  width: 4px;
-  height: 4px;
-  background: var(--orange-yellow-crayola);
-  border-radius: 50%;
+  content: none;
 }
 
 /* Section Title Enhancement */
@@ -842,7 +954,7 @@
   position: relative;
   overflow: hidden;
   transition: transform 520ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 520ms cubic-bezier(0.2, 0.9, 0.2, 1), border-color 520ms cubic-bezier(0.2, 0.9, 0.2, 1);
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 500 500'%3E%3Crect x='0' y='0' width='500' height='500' fill='none' rx='0' fill-opacity='0'/%3E%3C/svg%3E");
   background-size: 150px 150px;
   background-position: 0% 0%;
@@ -918,27 +1030,29 @@
 /* Tech Stack List Enhancement */
 .tech-stack-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
 }
 
 .tech-stack-item {
   background: linear-gradient(135deg, hsla(0, 0%, 100%, 0.04) 0%, hsla(0, 0%, 100%, 0.015) 100%);
   border: 1px solid hsla(0, 0%, 100%, 0.08);
-  border-radius: 20px;
-  padding: 30px;
-  transition: transform 450ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 450ms cubic-bezier(0.2, 0.9, 0.2, 1), border-color 450ms cubic-bezier(0.2, 0.9, 0.2, 1);
+  border-radius: 16px;
+  padding: 20px 18px;
+  transition: transform 450ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 450ms cubic-bezier(0.2, 0.9, 0.2, 1), border-color 450ms cubic-bezier(0.2, 0.9, 0.2, 1), background 450ms cubic-bezier(0.2, 0.9, 0.2, 1);
   --tech-accent: var(--orange-yellow-crayola);
   --tech-accent-soft: hsla(45, 100%, 72%, 0.07);
   --tech-accent-glow: hsla(45, 100%, 72%, 0.18);
   position: relative;
   overflow: hidden;
+  animation: techReveal 900ms cubic-bezier(0.19, 1, 0.22, 1) both;
 }
 
 .tech-stack-item:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--tech-accent) 55%, hsla(0, 0%, 100%, 0.08));
-  box-shadow: 0 26px 60px hsla(0, 0%, 0%, 0.32), 0 0 0 1px var(--tech-accent-soft) inset;
+  background: radial-gradient(circle at 0 0, var(--tech-accent-soft), transparent 55%), linear-gradient(135deg, hsla(0, 0%, 100%, 0.06), hsla(0, 0%, 100%, 0.015));
+  box-shadow: 0 18px 40px hsla(0, 0%, 0%, 0.34), 0 0 0 1px var(--tech-accent-soft) inset;
 }
 
 .tech-stack-item::after {
@@ -964,6 +1078,29 @@
   background: linear-gradient(135deg, var(--tech-accent-soft) 0%, hsla(0, 0%, 0%, 0.18) 100%);
   border-color: var(--tech-accent);
   box-shadow: 0 14px 30px var(--tech-accent-glow);
+}
+
+.tech-stack-item:nth-child(1) { animation-delay: 80ms; }
+.tech-stack-item:nth-child(2) { animation-delay: 140ms; }
+.tech-stack-item:nth-child(3) { animation-delay: 200ms; }
+.tech-stack-item:nth-child(4) { animation-delay: 260ms; }
+.tech-stack-item:nth-child(5) { animation-delay: 320ms; }
+.tech-stack-item:nth-child(6) { animation-delay: 380ms; }
+
+@keyframes techReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.97);
+    box-shadow: 0 0 0 hsla(0, 0%, 0%, 0.0);
+  }
+  55% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1040,15 +1177,15 @@
 .tech-header {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 14px;
   position: relative;
   z-index: 1;
 }
 
 .tech-icon-box {
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   background: var(--bg-gradient-onyx);
   border: 2px solid var(--jet);
   border-radius: 12px;
@@ -1086,7 +1223,7 @@
 .tech-items-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   position: relative;
   z-index: 1;
 }
@@ -1098,9 +1235,9 @@
   background: hsla(0, 0%, 0%, 0.18);
   border: 1px solid var(--tech-accent-soft);
   color: var(--light-gray);
-  font-size: var(--fs-7);
+  font-size: var(--fs-8);
   font-weight: var(--fw-500);
-  padding: 8px 14px;
+  padding: 6px 10px;
   border-radius: 20px;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -1110,7 +1247,8 @@
   background: linear-gradient(135deg, var(--tech-accent-soft) 0%, hsla(0, 0%, 0%, 0.18) 100%);
   border-color: var(--tech-accent);
   color: var(--white-1);
-  transform: translateY(-2px);
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: 0 10px 26px var(--tech-accent-glow);
 }
 
 .tech-badge ion-icon {
@@ -1294,6 +1432,11 @@
   .about-text {
     font-size: var(--fs-7);
     line-height: 1.6;
+  }
+
+  .about-badges {
+    padding-left: 0;
+    justify-content: center;
   }
 
   .about-subtitle {

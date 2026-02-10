@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      <main className="flex min-h-screen gap-8">
+      <main className="flex min-h-screen items-stretch gap-8 px-6 py-8 md:px-10 md:py-12">
         <Sidebar
           activePage={activePage}
           onPageChange={setActivePage}
@@ -20,10 +20,17 @@ function App() {
         />
         
         <div
-          className={`main-content flex-1 min-w-0 px-[30px] py-10 ${isSidebarCollapsed ? 'ml-[72px]' : 'ml-[280px]'}`}
+          className={`main-content flex-1 min-w-0 transition-[margin] duration-500 ease-[cubic-bezier(0.2,0.9,0.2,1)] ${
+            isSidebarCollapsed ? 'ml-[72px]' : 'ml-[280px]'
+          }`}
         >
-          {activePage === 'about' && <About />}
-          {activePage === 'resume' && <Resume />}
+          <div
+            key={activePage}
+            className="page-shell"
+          >
+            {activePage === 'about' && <About />}
+            {activePage === 'resume' && <Resume />}
+          </div>
         </div>
       </main>
     </div>
